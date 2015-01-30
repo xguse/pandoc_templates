@@ -128,8 +128,14 @@ $if(lang)$
 \fi
 $endif$
 
+
 $if(author)$
+$if(fromsig)$
+% DONT set \signature
+$else$
+% DO set \signature
 \signature{$author$}
+$endif$
 $endif$
 
 $if(date)$
@@ -175,9 +181,20 @@ $endif$
 $body$
 
 $if(closing)$
+$if(fromsig)$
+% Move signature and close to the left
+\longindentation=0pt
+
+\closing{$closing$\\
+\vspace{12pt}
+\fromsig{\includegraphics[height=36pt]{$fromsig$}} \\
+\fromname{$author$}
+}
+$else$
 % Move signature and close to the left
 \longindentation=0pt
 \closing{$closing$}
+$endif$
 $endif$
 
 \end{letter}
